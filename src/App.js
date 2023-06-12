@@ -1,9 +1,9 @@
-import logo from "./logo.svg";
 import "./App.css";
 import React, { Component, useState, useEffect } from "react";
 import axios from "axios";
+import CircularProgress from "@mui/material/CircularProgress";
 
-function App() {
+export default function App() {
   const [jobDescription, setJobDescription] = useState("");
   const [company, setCompany] = useState("");
   const [description, setDescription] = useState("");
@@ -43,7 +43,7 @@ function App() {
         temperature: 0.9,
         k: 0,
         stop_sequence: [],
-        prompt: `In 200 words,Generate a one line description, list of requirements and list of qualifications for a ${role} at a company named ${company} based on the following description.${description}`,
+        prompt: `In 200 words,Generate a one line description, list of  minimum of three requirements and list of minimum of three qualifications for a ${role} at a company named ${company} based on the following description.${description}`,
       },
     };
 
@@ -69,7 +69,10 @@ function App() {
       <p className="app-title">
         Built using React.js and Cohere LLM APIs. Please hire me
       </p>
-      <p>By Nourish Cherish, 4A Computer Engineering, University of Waterloo, ncherish@uwaterloo.ca</p>
+      <p>
+        By Nourish Cherish, 4A Computer Engineering, University of Waterloo,
+        ncherish@uwaterloo.ca
+      </p>
       <input
         className="input-box"
         type="text"
@@ -96,6 +99,7 @@ function App() {
         }}>
         Submit
       </button>
+      {loading ? <CircularProgress /> : null}
       {jobDescription.length > 0 && jobDescription ? (
         <div className="jobDescriptionContainer">
           <p>{jobDescription}</p>
@@ -104,5 +108,3 @@ function App() {
     </div>
   );
 }
-
-export default App;
